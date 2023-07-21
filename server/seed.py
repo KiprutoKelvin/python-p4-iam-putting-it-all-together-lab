@@ -26,14 +26,15 @@ with app.app_context():
     for i in range(20):
         
         username = fake.first_name()
-        while username in usernames:
-            username = fake.first_name()
-        usernames.append(username)
+        email = fake.email()  # Generate a random email for each user
+        bio = fake.paragraph(nb_sentences=3)
+        image_url = fake.url()
 
         user = User(
             username=username,
-            bio=fake.paragraph(nb_sentences=3),
-            image_url=fake.url(),
+            email=email,  # Assign the generated email to the user
+            bio=bio,
+            image_url=image_url,
         )
 
         user.password_hash = user.username + 'password'
